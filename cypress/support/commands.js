@@ -8,6 +8,18 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 //
+
+Cypress.Commands.add('fillMandatoryFieldsAndSubmit', (name, surname, email, text) => {
+    cy.get('#firstName').type(name)
+    cy.get('#lastName').type(surname)
+    cy.get('#email').type(email)
+    cy.get('#open-text-area').type(text)
+    cy.get('button.button').click()
+
+    cy.get('.success').should('be.visible')
+    cy.get('.success').contains('Mensagem enviada com sucesso.').should('be.visible')
+  })
+
 //
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
